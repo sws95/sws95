@@ -57,6 +57,8 @@ H&M 실거래 데이터 3,178만 건으로 만든 자연어 기반 옷 추천 �
 
 업무 분석을 돕기 위해 만든 에이전트들입니다. 업무 데이터 위에서 돌아가서 코드는 올리지 않고 구조만 적었습니다.
 
+<blockquote>
+
 <details>
 <summary>/idea (가설 생성)</summary>
 
@@ -91,6 +93,8 @@ opus와 sonnet이 따로 아이디어를 내고, 어디서 나온 안인지 가�
 
 </details>
 
+</blockquote>
+
 </details>
 
 <details>
@@ -106,6 +110,8 @@ Amazon Reviews 2023의 화장품과 옷 리뷰를 근거로 상품을 추천하�
 - 대화 흐름은 LangGraph로 짰습니다. 이전 조건과 합치기, 검색어 다시 쓰기, 추천인지 상품 질문인지 나누기, 되묻기, 결과가 적으면 다시 검색하기까지 들어갑니다. 대화 상태와 프로필은 Redis에 둡니다.
 - 새 리뷰는 Kafka로 받아서 임베딩과 측면 추출을 따로 처리하고, 프롬프트를 바꾸면 예전 리뷰도 다시 돌릴 수 있게 했습니다.
 - 대화에서 나온 클릭과 거절은 선호에 반영하고, RAG 성능(recall, 충실도)은 MLflow에 남겨서 프롬프트나 리랭커를 바꿀 때 비교합니다.
+
+<blockquote>
 
 <details>
 <summary>인덱스 쌓기 (리뷰 수집, 스트리밍)</summary>
@@ -133,6 +139,8 @@ Amazon Reviews 2023의 화장품과 옷 리뷰를 근거로 상품을 추천하�
 <img src="img/rag_example.png" width="560">
 
 </details>
+
+</blockquote>
 
 [repository](https://github.com/sws95/product-extraction-chatbot)
 
