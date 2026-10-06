@@ -51,6 +51,49 @@ H&M 실거래 데이터 3,178만 건으로 만든 자연어 기반 옷 추천 �
 </details>
 
 <details>
+<summary><b>LLM 분석 에이전트 (LangGraph)</b>: 가설 생성, 분석과 독립 검증</summary>
+
+<br>
+
+업무 분석을 돕기 위해 만든 에이전트들입니다. 업무 데이터 위에서 돌아가서 코드는 올리지 않고 구조만 적었습니다.
+
+<details>
+<summary>/idea (가설 생성)</summary>
+
+<br>
+
+opus와 sonnet이 따로 아이디어를 내고, 어디서 나온 안인지 가린 채로 묶어서 같은 얘기를 반복하는 비율과 한쪽으로 쏠리는 정도를 숫자로 봅니다. 예전에 기각된 안은 가정을 바꿔서 다시 시도하고, 비슷한 선례를 찾아본 뒤 "이 숫자가 안 나오면 버린다"는 기준까지 붙여서 검증할 가설 세 개로 좁힙니다. 생성 단계는 이전 기억에 끌려가지 않도록 메모리를 볼 수 없는 환경에서 돌립니다.
+
+<img src="img/idea.png" width="520">
+
+</details>
+
+<details>
+<summary>/analyze와 /verify-claim (분석과 독립 검증)</summary>
+
+<br>
+
+/analyze는 질문이나 주장을 받아서 검증까지 이어가는 그래프입니다. 질문을 넣으면 원인을 진단해서 주장을 만들고, 이미 나온 숫자(주장)를 넣으면 사람이 검증 기준을 확인한 뒤 바로 검증으로 갑니다. 검증 기준은 실행 전에 먼저 정해둡니다. 기각되면 다른 방법으로 다시 진단하고, 사람이 결과에 반론을 달면 그 반론을 실행할 수 있는 SQL과 기준으로 바꿔서 다시 검증합니다. /idea가 낸 가설도 이 경로로 검증합니다.
+
+가운데 검증 단계가 /verify-claim입니다. 에이전트끼리 토론시키지 않고 역할별로 따로 돌린 뒤, 판정은 스크립트가 합니다.
+
+- 재현: 원래 코드를 다시 돌려서 계산 실수를 찾습니다.
+- 반증: 데이터 원천, 지표 정의, 음성 대조, 부분집합을 바꿔서 다시 재봅니다.
+- 블라인드: 원래 숫자를 모른 채 질문만 보고 잽니다.
+- 판정 기준은 실행 전에 정해두고, 보면 안 되는 파일에 접근했는지는 로그로 확인합니다.
+
+<table>
+<tr>
+<td width="50%" valign="top"><b>/analyze</b> (질문, 주장 두 입구)<br><img src="img/analyze.png" width="100%"></td>
+<td width="50%" valign="top"><b>/verify-claim</b> (가운데 노란 칸 확대)<br><img src="img/verify.png" width="100%"></td>
+</tr>
+</table>
+
+</details>
+
+</details>
+
+<details>
 <summary><b>product-extraction-chatbot</b>: 상품 정보 추출과 리뷰 기반 상담 챗봇 (진행 중)</summary>
 
 <br>
@@ -92,48 +135,5 @@ Amazon Reviews 2023의 화장품과 옷 리뷰를 근거로 상품을 추천하�
 </details>
 
 [repository](https://github.com/sws95/product-extraction-chatbot)
-
-</details>
-
-<details>
-<summary><b>LLM 분석 에이전트 (LangGraph)</b>: 가설 생성, 분석과 독립 검증</summary>
-
-<br>
-
-업무 분석을 돕기 위해 만든 에이전트들입니다. 업무 데이터 위에서 돌아가서 코드는 올리지 않고 구조만 적었습니다.
-
-<details>
-<summary>/idea (가설 생성)</summary>
-
-<br>
-
-opus와 sonnet이 따로 아이디어를 내고, 어디서 나온 안인지 가린 채로 묶어서 같은 얘기를 반복하는 비율과 한쪽으로 쏠리는 정도를 숫자로 봅니다. 예전에 기각된 안은 가정을 바꿔서 다시 시도하고, 비슷한 선례를 찾아본 뒤 "이 숫자가 안 나오면 버린다"는 기준까지 붙여서 검증할 가설 세 개로 좁힙니다. 생성 단계는 이전 기억에 끌려가지 않도록 메모리를 볼 수 없는 환경에서 돌립니다.
-
-<img src="img/idea.png" width="520">
-
-</details>
-
-<details>
-<summary>/analyze와 /verify-claim (분석과 독립 검증)</summary>
-
-<br>
-
-/analyze는 질문이나 주장을 받아서 검증까지 이어가는 그래프입니다. 질문을 넣으면 원인을 진단해서 주장을 만들고, 이미 나온 숫자(주장)를 넣으면 사람이 검증 기준을 확인한 뒤 바로 검증으로 갑니다. 검증 기준은 실행 전에 먼저 정해둡니다. 기각되면 다른 방법으로 다시 진단하고, 사람이 결과에 반론을 달면 그 반론을 실행할 수 있는 SQL과 기준으로 바꿔서 다시 검증합니다. /idea가 낸 가설도 이 경로로 검증합니다.
-
-가운데 검증 단계가 /verify-claim입니다. 에이전트끼리 토론시키지 않고 역할별로 따로 돌린 뒤, 판정은 스크립트가 합니다.
-
-- 재현: 원래 코드를 다시 돌려서 계산 실수를 찾습니다.
-- 반증: 데이터 원천, 지표 정의, 음성 대조, 부분집합을 바꿔서 다시 재봅니다.
-- 블라인드: 원래 숫자를 모른 채 질문만 보고 잽니다.
-- 판정 기준은 실행 전에 정해두고, 보면 안 되는 파일에 접근했는지는 로그로 확인합니다.
-
-<table>
-<tr>
-<td width="50%" valign="top"><b>/analyze</b> (질문, 주장 두 입구)<br><img src="img/analyze.png" width="100%"></td>
-<td width="50%" valign="top"><b>/verify-claim</b> (가운데 노란 칸 확대)<br><img src="img/verify.png" width="100%"></td>
-</tr>
-</table>
-
-</details>
 
 </details>
