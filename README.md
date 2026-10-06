@@ -142,8 +142,3 @@ opus와 sonnet이 따로 아이디어를 내고, 어디서 나온 안인지 가�
 </details>
 
 <br>
-
-## Contact
-
-Email: your.email@example.com
-LinkedIn: https://www.linkedin.com/in/your-id
