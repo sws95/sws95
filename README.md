@@ -3,8 +3,8 @@
 추천, 광고 모델링과 LLM 에이전트까지 E2E로 만드는 걸 선호합니다.
 모델을 만드는 데서 끝내지 않고, 서빙하고, 검증합니다.
 
-관심 분야: 개인화 추천 시스템, CTR/CVR 예측, 입찰 최적화, RAG, LLM 에이전트
-주로 쓰는 것: Python, PyTorch, LangGraph, LangChain, MLflow, Airflow, Docker, Kafka, Redis
+- 관심 분야: 개인화 추천 시스템, CTR/CVR 예측, 입찰 최적화, RAG, LLM 에이전트
+- 주로 쓰는 것: Python, PyTorch, LangGraph, LangChain, MLflow, Airflow, Docker, Kafka, Redis
 
 <br>
 
@@ -140,5 +140,3 @@ opus와 sonnet이 따로 아이디어를 내고, 어디서 나온 안인지 가�
 </details>
 
 </details>
-
-<br>
