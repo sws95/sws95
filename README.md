@@ -23,7 +23,7 @@
 - iPinYou에서 AUC가 0.99로 너무 높게 나와서 누출을 의심했고, 피처를 하나씩 빼 보면서 원인 피처를 찾았습니다. 벤치마크 논문 결과를 재현해서 누출이 아니라 정상 신호라는 것도 확인했습니다.
 - win rate를 CDF와 KM으로 추정해 ORTB로 입찰했고, 시장가가 바뀌면서 고정 λ가 무너지는 구간은 PID 페이싱으로 oracle의 99%까지 회복했습니다.
 
-<img src="img/ads.png" width="560">
+<img src="img/ads.png">
 
 [repository](https://github.com/sws95/ads_prediction)
 
@@ -44,7 +44,7 @@ H&M 실거래 데이터 3,178만 건으로 만든 자연어 기반 옷 추천 �
 - MLflow로 실험을 기록하고, Docker로 GPU 서빙을 하고, Airflow로 새 데이터가 들어오면 BPR을 다시 학습해서 평가한 뒤 모델을 교체합니다.
 - 임베딩 모델은 CLIP과 비교했을 때 Qwen3-VL이 HitRate@5 기준 48% 높았고, 두 점수를 섞는 비율(α)도 실험으로 정했습니다.
 
-<img src="img/fashion.png" width="560">
+<img src="img/fashion.png">
 
 [repository](https://github.com/sws95/fashion-recommend-llm)
 
@@ -66,7 +66,7 @@ H&M 실거래 데이터 3,178만 건으로 만든 자연어 기반 옷 추천 �
 
 opus와 sonnet이 따로 아이디어를 내고, 어디서 나온 안인지 가린 채로 묶어서 같은 얘기를 반복하는 비율과 한쪽으로 쏠리는 정도를 숫자로 봅니다. 예전에 기각된 안은 가정을 바꿔서 다시 시도하고, 비슷한 선례를 찾아본 뒤 "이 숫자가 안 나오면 버린다"는 기준까지 붙여서 검증할 가설 세 개로 좁힙니다. 생성 단계는 이전 기억에 끌려가지 않도록 메모리를 볼 수 없는 환경에서 돌립니다.
 
-<img src="img/idea.png" width="520">
+<img src="img/idea.png">
 
 </details>
 
@@ -118,7 +118,7 @@ Amazon Reviews 2023의 화장품과 옷 리뷰를 근거로 상품을 추천하�
 
 <br>
 
-<img src="img/rag_ingest.png" width="560">
+<img src="img/rag_ingest.png">
 
 </details>
 
@@ -127,7 +127,7 @@ Amazon Reviews 2023의 화장품과 옷 리뷰를 근거로 상품을 추천하�
 
 <br>
 
-<img src="img/rag_chatbot.png" width="560">
+<img src="img/rag_chatbot.png">
 
 </details>
 
@@ -136,7 +136,7 @@ Amazon Reviews 2023의 화장품과 옷 리뷰를 근거로 상품을 추천하�
 
 <br>
 
-<img src="img/rag_example.png" width="560">
+<img src="img/rag_example.png">
 
 </details>
 
