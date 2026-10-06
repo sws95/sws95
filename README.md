@@ -95,7 +95,7 @@ Amazon Reviews 2023의 화장품과 옷 리뷰를 근거로 상품을 추천하�
 </details>
 
 <details>
-<summary><b>LLM 분석 에이전트 (LangGraph)</b>: 가설 생성, 분석, 독립 검증 세 단계</summary>
+<summary><b>LLM 분석 에이전트 (LangGraph)</b>: 가설 생성, 분석과 독립 검증</summary>
 
 <br>
 
@@ -113,29 +113,25 @@ opus와 sonnet이 따로 아이디어를 내고, 어디서 나온 안인지 가�
 </details>
 
 <details>
-<summary>분석 에이전트 (질문에서 결론까지)</summary>
+<summary>/analyze와 /verify-claim (분석과 독립 검증)</summary>
 
 <br>
 
-질문을 받으면 원인을 진단하고, 검증 기준을 먼저 정한 다음 독립 검증을 거쳐서 보고합니다. 검증에서 기각되면 다른 방법으로 다시 진단하고, 사람이 반론을 달면 그걸 실행할 수 있는 SQL과 기준으로 바꿔서 다시 검증합니다.
+/analyze는 질문을 받으면 원인을 진단하고, 검증 기준을 먼저 정한 다음 독립 검증을 거쳐서 보고합니다. 검증에서 기각되면 다른 방법으로 다시 진단하고, 사람이 결과에 반론을 달면 그 반론을 실행할 수 있는 SQL과 기준으로 바꿔서 다시 검증합니다. /idea가 낸 가설도 이 경로로 검증합니다.
 
-<img src="img/agent.png" width="520">
-
-</details>
-
-<details>
-<summary>독립 검증 (결론을 숨기고 따로 재기)</summary>
-
-<br>
-
-에이전트끼리 토론시키지 않고 역할별로 따로 돌린 뒤, 판정은 스크립트가 합니다.
+이 중 검증 단계가 /verify-claim입니다. 에이전트끼리 토론시키지 않고 역할별로 따로 돌린 뒤, 판정은 스크립트가 합니다.
 
 - 재현: 원래 코드를 다시 돌려서 계산 실수를 찾습니다.
 - 반증: 데이터 원천, 지표 정의, 음성 대조, 부분집합을 바꿔서 다시 재봅니다.
 - 블라인드: 원래 숫자를 모른 채 질문만 보고 잽니다.
 - 판정 기준은 실행 전에 정해두고, 보면 안 되는 파일에 접근했는지는 로그로 확인합니다.
 
-<img src="img/verify.png" width="520">
+<table>
+<tr>
+<td width="50%" valign="top"><b>/analyze</b><br><img src="img/agent.png" width="100%"></td>
+<td width="50%" valign="top"><b>/verify-claim</b> (역할 병렬 검증 확대)<br><img src="img/verify.png" width="100%"></td>
+</tr>
+</table>
 
 </details>
 
