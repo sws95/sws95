@@ -129,7 +129,7 @@ opus와 sonnet이 따로 아이디어를 내고, 어디서 나온 안인지 가�
 
 <table>
 <tr>
-<td width="50%" valign="top"><b>/analyze</b> (질문, 주장 두 입구)<br><img src="img/agent.png" width="100%"></td>
+<td width="50%" valign="top"><b>/analyze</b> (질문, 주장 두 입구)<br><img src="img/analyze.png" width="100%"></td>
 <td width="50%" valign="top"><b>/verify-claim</b> (가운데 노란 칸 확대)<br><img src="img/verify.png" width="100%"></td>
 </tr>
 </table>
