@@ -10,7 +10,7 @@
 
 ## Projects
 
-<details open>
+<details>
 <summary><b>ads_prediction</b>: CTR/CVR 예측부터 입찰, 예산 페이싱까지</summary>
 
 <br>
@@ -50,13 +50,14 @@ H&M 실거래 데이터 3,178만 건으로 만든 자연어 기반 옷 추천 �
 </details>
 
 <details>
-<summary><b>llm_beauty</b>: 리뷰를 근거로 답하는 상담 챗봇 (진행 중)</summary>
+<summary><b>product-extraction-chatbot</b>: 상품 정보 추출과 리뷰 기반 상담 챗봇 (진행 중)</summary>
 
 <br>
 
 Amazon Reviews 2023의 화장품과 옷 리뷰를 근거로 상품을 추천하고 질문에 답하는 RAG 챗봇을 만들고 있습니다.
 
-- LLM으로 리뷰에서 "보온성 좋음", "털 빠짐 적음" 같은 측면을 정해진 값으로 뽑아서 검색 단위와 상품 속성으로 씁니다.
+- 상품 정보도 LLM으로 다시 정리합니다. Amazon 상품 데이터는 제목에 검색 키워드가 뒤섞여 있고 설명이 비어 있는 경우가 많아서, 제목과 설명(이미지가 있으면 이미지까지)에서 종류, 소재, 색상, 용량 같은 속성을 정해진 값으로 뽑아 검색 필터와 추천 피처로 씁니다.
+- 리뷰에서는 "보온성 좋음", "털 빠짐 적음" 같은 측면을 정해진 값으로 뽑아서 검색 단위와 상품 속성으로 씁니다.
 - 검색은 필터와 임베딩(bge-small), BM25를 섞어서 하고, 크로스인코더 리랭커로 한 번 더 거른 뒤 리뷰를 인용해서 답합니다.
 - 대화 흐름은 LangGraph로 짰습니다. 이전 조건과 합치기, 검색어 다시 쓰기, 추천인지 상품 질문인지 나누기, 되묻기, 결과가 적으면 다시 검색하기까지 들어갑니다. 대화 상태와 프로필은 Redis에 둡니다.
 - 새 리뷰는 Kafka로 받아서 임베딩과 측면 추출을 따로 처리하고, 프롬프트를 바꾸면 예전 리뷰도 다시 돌릴 수 있게 했습니다.
@@ -89,34 +90,43 @@ Amazon Reviews 2023의 화장품과 옷 리뷰를 근거로 상품을 추천하�
 
 </details>
 
-[repository](https://github.com/sws95/llm_beauty)
+[repository](https://github.com/sws95/product-extraction-chatbot)
 
 </details>
 
-<br>
+<details>
+<summary><b>LLM 분석 에이전트 (LangGraph)</b>: 가설 생성, 분석, 독립 검증 세 단계</summary>
 
-## LLM Agents (LangGraph)
+<br>
 
 업무 분석을 돕기 위해 만든 에이전트들입니다. 업무 데이터 위에서 돌아가서 코드는 올리지 않고 구조만 적었습니다.
 
 <details>
-<summary><b>가설 생성, 분석, 독립 검증</b> 세 단계</summary>
+<summary>/idea (가설 생성)</summary>
 
 <br>
-
-**/idea (가설 생성)**
 
 opus와 sonnet이 따로 아이디어를 내고, 어디서 나온 안인지 가린 채로 묶어서 같은 얘기를 반복하는 비율과 한쪽으로 쏠리는 정도를 숫자로 봅니다. 예전에 기각된 안은 가정을 바꿔서 다시 시도하고, 비슷한 선례를 찾아본 뒤 "이 숫자가 안 나오면 버린다"는 기준까지 붙여서 검증할 가설 세 개로 좁힙니다. 생성 단계는 이전 기억에 끌려가지 않도록 메모리를 볼 수 없는 환경에서 돌립니다.
 
 <img src="img/idea.png" width="520">
 
-**분석 에이전트 (질문에서 결론까지)**
+</details>
+
+<details>
+<summary>분석 에이전트 (질문에서 결론까지)</summary>
+
+<br>
 
 질문을 받으면 원인을 진단하고, 검증 기준을 먼저 정한 다음 독립 검증을 거쳐서 보고합니다. 검증에서 기각되면 다른 방법으로 다시 진단하고, 사람이 반론을 달면 그걸 실행할 수 있는 SQL과 기준으로 바꿔서 다시 검증합니다.
 
 <img src="img/agent.png" width="520">
 
-**독립 검증 (결론을 숨기고 따로 재기)**
+</details>
+
+<details>
+<summary>독립 검증 (결론을 숨기고 따로 재기)</summary>
+
+<br>
 
 에이전트끼리 토론시키지 않고 역할별로 따로 돌린 뒤, 판정은 스크립트가 합니다.
 
@@ -126,6 +136,8 @@ opus와 sonnet이 따로 아이디어를 내고, 어디서 나온 안인지 가�
 - 판정 기준은 실행 전에 정해두고, 보면 안 되는 파일에 접근했는지는 로그로 확인합니다.
 
 <img src="img/verify.png" width="520">
+
+</details>
 
 </details>
 
