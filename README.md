@@ -5,8 +5,8 @@
 
 - 관심 분야: 개인화 추천 시스템, CTR/CVR 예측, 입찰 최적화, RAG, LLM 에이전트
 - 주로 쓰는 것: Python, PyTorch, LangGraph, LangChain, MLflow, Airflow, Docker, Kafka, Redis
-
 <br>
+
 ## Projects
 
 <details>
