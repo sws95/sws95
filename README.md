@@ -7,7 +7,6 @@
 - 주로 쓰는 것: Python, PyTorch, LangGraph, LangChain, MLflow, Airflow, Docker, Kafka, Redis
 
 <br>
-
 ## Projects
 
 <details>
